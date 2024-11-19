@@ -49,16 +49,10 @@ readonly class Key {
         };
     }
 
-    static function public(Key\Format $format = Key\Format::HEXIDECIMAL): callable {
-        return fn (#[\SensitiveParameter] string $private_key): string => match ($format) {
-            Key\Format::BINARY => hex2bin(substr(self::curve()->keyFromPrivate($private_key)->getPublic(true, 'hex'), 2)),
-                    Key\Format::HEXIDECIMAL => substr(self::curve()->keyFromPrivate($private_key)->getPublic(true, 'hex'), 2),
-                };
+    static function public(): callable {
+        return fn(#[\SensitiveParameter] string $private_key): string => substr(self::curve()->keyFromPrivate($private_key)->getPublic(true, 'hex'), 2);
     }
-    static function private(Key\Format $format = Key\Format::HEXIDECIMAL): callable {
-        return fn (#[\SensitiveParameter] string $private_key): string => match ($format) {
-            Key\Format::BINARY => hex2bin($private_key),
-                    Key\Format::HEXIDECIMAL => $private_key,
-        };
+    static function private(): callable {
+        return fn(#[\SensitiveParameter] string $private_key): string => $private_key;
     }
 }

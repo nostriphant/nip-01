@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f259c002d7311f85d899558d3a98a0f",
+    "content-hash": "96fe5666df95941f65b586b765b6bd07",
     "packages": [
         {
             "name": "simplito/bigint-wrapper-php",
@@ -3766,7 +3766,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.3"
+        "php": "^8.3",
+        "ext-secp256k1_nostr": "*"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
