@@ -4,6 +4,7 @@
     "type": "library",
     "require": {
         "php": "^8.3",
+        "ext-secp256k1_nostr": "*",
         "simplito/elliptic-php": "^1.0"
     },
     "license": "MIT",
