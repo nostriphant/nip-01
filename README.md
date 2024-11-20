@@ -4,6 +4,8 @@ Nostr NIP-01 implementation in PHP, currently this contains only the private/pub
 ## Key usage
 
 ```
+use nostriphant\NIP01\Key;
+
 $private_key = Key::fromHex('435790f13406085d153b10bd9e00a9f977e637f10ce37db5ccfc5d3440c12d6c');
 
 $public_key = $private_key(Key::public());
