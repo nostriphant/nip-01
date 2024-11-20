@@ -14,7 +14,7 @@
             "nostriphant\\NIP01\\": "src/",
             "nostriphant\\NIP01Tests\\": "tests/"
         },
-        "files": ["pest.php", "tests/Pest.php"]
+        "files": ["pest.php", "tests/Functions.php"]
     },
     "authors": [
         {
