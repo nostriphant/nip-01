@@ -8,8 +8,8 @@ it('generates a public key without an argument', function() {
     expect($private_key(Key::public()))->toBe('89ac55aeeb301252da33b51ca4d189cb1d665b8f00618f5ea72c2ec59ca555e9');
 });
 
-it('converts between bytes, bech32 and hexidecimal', function() {
-    
+it('converts between bytes and hexidecimal', function () {
+
     $public_key_hex = '7e7e9c42a91bfef19fa929e5fda1b72e0ebc1a4c1141673e2794234d86addf4e';
     //$public_key_bech32 = 'npub10elfcs4fr0l0r8af98jlmgdh9c8tcxjvz9qkw038js35mp4dma8qzvjptg';
     $private_key_hex = '67dea2ed018072d675f5415ecfaed7d2597555e202d85b3d65ea4e58d2d92ffa';
@@ -20,6 +20,14 @@ it('converts between bytes, bech32 and hexidecimal', function() {
     expect($key(Key::public()))->toBe($public_key_hex);
 });
 
+
+it('converts between bytes and hexidecimal for provided functions', function () {
+    $private_key = \Pest\key_sender();
+    expect($private_key(Key::public()))->toBe(Pest\pubkey_sender());
+
+    $private_key = \Pest\key_recipient();
+    expect($private_key(Key::public()))->toBe(Pest\pubkey_recipient());
+})->with();
 
 it('works with paulmillrs vectors', function ($vector) {
     // https://github.com/paulmillr/noble-secp256k1/blob/main/test/wycheproof/ecdh_secp256k1_test.json

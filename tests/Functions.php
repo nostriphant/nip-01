@@ -3,17 +3,18 @@
 namespace Pest;
 
 use nostriphant\NIP01\Event;
+use nostriphant\NIP01\Key;
 
 function vectors(string $name): object {
     return json_decode(file_get_contents(__DIR__ . '/vectors/' . $name . '.json'), false);
 }
 
-function key(string $nsec): Key {
-    return Key::fromHex(Bech32::fromNsec($nsec));
+function key(string $hex): Key {
+    return Key::fromHex($hex);
 }
 
 function key_sender(): Key {
-    return key('nsec15udyzkfk7twhpdmhu5syc4lqm7dxmll0jxeu0rq65f89gaewx0ps89derx');
+    return key('a71a415936f2dd70b777e5204c57e0df9a6dffef91b3c78c1aa24e54772e33c3');
 }
 
 function pubkey_sender(): string {
@@ -21,7 +22,7 @@ function pubkey_sender(): string {
 }
 
 function key_recipient(): Key {
-    return key('nsec1dm444kv7gug4ge7sjms8c8ym3dqhdz44x3jhq0mcq9eqftw9krxqymj9qk');
+    return key('6eeb5ad99e47115467d096e07c1c9b8b41768ab53465703f78017204adc5b0cc');
 }
 
 function pubkey_recipient(): string {
