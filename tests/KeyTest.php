@@ -1,7 +1,7 @@
 <?php
 
 use nostriphant\NIP01\Key;
-use function \Pest\vectors;
+use function \Pest\vectors_secp256k1;
 
 it('generates a public key without an argument', function() {
     $private_key = Key::fromHex('435790f13406085d153b10bd9e00a9f977e637f10ce37db5ccfc5d3440c12d6c');
@@ -33,7 +33,7 @@ it('works with paulmillrs vectors', function ($vector) {
     // https://github.com/paulmillr/noble-secp256k1/blob/main/test/wycheproof/ecdh_secp256k1_test.json
     $secret = Key::fromHex($vector->private)(Key::sharedSecret(substr($vector->public, 46)));
     expect(str_pad($secret, 64, '0', STR_PAD_LEFT))->toBe($vector->shared);
-})->with(array_filter(vectors('ecdh-secp256k1')->testGroups[0]->tests, fn($vector) => $vector->result === 'valid'));
+})->with(array_filter(vectors_secp256k1()->testGroups[0]->tests, fn($vector) => $vector->result === 'valid'));
 
 it('can sign a string and verify a signature', function () {
     $private_key = Key::fromHex('435790f13406085d153b10bd9e00a9f977e637f10ce37db5ccfc5d3440c12d6c');

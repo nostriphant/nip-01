@@ -5,8 +5,8 @@ namespace Pest;
 use nostriphant\NIP01\Event;
 use nostriphant\NIP01\Key;
 
-function vectors(string $name): object {
-    return json_decode(file_get_contents(__DIR__ . '/vectors/' . $name . '.json'), false);
+function vectors_secp256k1(): object {
+    return json_decode(file_get_contents(__DIR__ . '/vectors/ecdh-secp256k1.json'), false);
 }
 
 function key(string $hex): Key {
