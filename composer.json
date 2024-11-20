@@ -1,5 +1,5 @@
 {
-    "name": "nostriphant/nip01",
+    "name": "nostriphant/nip-01",
     "description": "Nostr NIP-01 implementation in PHP",
     "type": "library",
     "require": {
