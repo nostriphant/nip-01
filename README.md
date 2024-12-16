@@ -17,3 +17,23 @@ if (Key::verify($public_key, $signature, $hash)) {
     echo 'Signature belongs to hash';
 }
 ```
+
+
+## Message usage
+
+```
+use nostriphant\NIP01\Message;
+
+$message = Message::count(1);
+print $message; // prints "['COUNT',1]"
+
+```
+
+```
+use nostriphant\NIP01\Message;
+use nostriphant\NIP01\Event;
+
+$message = Message::event(new Event());
+print $message; // prints "['EVENT',{...}]"
+
+```

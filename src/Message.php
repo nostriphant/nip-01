@@ -23,4 +23,8 @@ readonly class Message {
     static function decode(string $json): self {
         return new self(...Nostr::decode($json));
     }
+
+    static function __callStatic(string $name, array $arguments): self {
+        return new self(strtoupper($name), ...$arguments);
+    }
 }
