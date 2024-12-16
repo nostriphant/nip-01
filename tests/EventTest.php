@@ -32,3 +32,9 @@ describe('alternating based on event kind', function () {
     });
 });
 
+it('returns object vars on invocation', function () {
+    $event = event([]);
+
+    expect($event())->toBe(get_object_vars($event));
+});
+

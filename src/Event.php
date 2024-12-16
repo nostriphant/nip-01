@@ -48,4 +48,9 @@ readonly class Event {
     public static function __set_state(array $properties) : self {
         return new self(...$properties);
     }
+
+
+    public function __invoke(): array {
+        return get_object_vars($this);
+    }
 }

@@ -35,6 +35,6 @@ it('can fabric a message with an Event', function () {
             tags: []
     ));
 
-    expect($message())->toBe(["EVENT", $event]);
+    expect($message())->toBe(["EVENT", get_object_vars($event)]);
     expect('' . $message)->toBe('["EVENT",{"id":"","pubkey":"","created_at":1734349976,"kind":1,"content":"Hello World","sig":"","tags":[]}]');
 });

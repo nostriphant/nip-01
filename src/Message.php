@@ -25,6 +25,13 @@ readonly class Message {
     }
 
     static function __callStatic(string $name, array $arguments): self {
-        return new self(strtoupper($name), ...$arguments);
+
+        return new self(strtoupper($name), ...array_map(function (mixed $argument) {
+                    if ($argument instanceof Event) {
+                        return $argument();
+                    } else {
+                        return $argument;
+                    }
+                }, $arguments));
     }
 }
