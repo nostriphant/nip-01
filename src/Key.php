@@ -23,9 +23,14 @@ readonly class Key {
     }
 
     static function generate(): callable {
-        $ec = self::curve();
-        $key = $ec->genKeyPair();
-        return self::fromHex($key->priv->toString('hex'));
+        $config = [
+            //"config" => getenv('OPENSSL_CONF'),
+            'private_key_type' => OPENSSL_KEYTYPE_EC,
+            'curve_name' => 'secp256k1'
+        ];
+        $keypair = openssl_pkey_new($config);
+        $details = openssl_pkey_get_details($keypair);
+        return new self(implode(unpack("H*", $details['ec']['d'])));
     }
 
     static function signer(string $hash): callable {

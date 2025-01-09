@@ -3,6 +3,16 @@
 use nostriphant\NIP01\Key;
 use function \Pest\vectors_secp256k1;
 
+
+it('generates a private key', function () {
+    $private_key = Key::generate();
+    $hex_private_key = $private_key(Key::private());
+    expect($hex_private_key)->toBeString();
+
+    $hex_public_key = $private_key(Key::public());
+    expect($hex_public_key)->toBe(substr((new Elliptic\EC('secp256k1'))->keyFromPrivate($hex_private_key)->getPublic(true, 'hex'), 2));
+});
+
 it('generates a public key without an argument', function() {
     $private_key = Key::fromHex('435790f13406085d153b10bd9e00a9f977e637f10ce37db5ccfc5d3440c12d6c');
     expect($private_key(Key::public()))->toBe('89ac55aeeb301252da33b51ca4d189cb1d665b8f00618f5ea72c2ec59ca555e9');
