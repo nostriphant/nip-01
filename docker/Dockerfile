@@ -17,4 +17,4 @@ WORKDIR "/opt/secp256k1-nostr-php"
 RUN ["make", "ext"]
 RUN ["make", "check"]
 RUN ["make", "install"]
-ADD ["./ext-secp256k1-nostr-php.ini", "$PHP_INI_DIR/conf.d/ext-secp256k1-nostr-php.ini"]
+ADD ["./docker/ext-secp256k1-nostr-php.ini", "$PHP_INI_DIR/conf.d/ext-secp256k1-nostr-php.ini"]
