@@ -13,8 +13,10 @@
         "psr-4": {
             "nostriphant\\NIP01\\": "src/",
             "nostriphant\\NIP01Tests\\": "tests/"
-        },
-        "files": ["pest.php", "tests/Functions.php"]
+        }
+    },
+    "autoload-dev": {
+        "files": ["tests/Functions.php"]
     },
     "authors": [
         {
@@ -33,11 +35,6 @@
     "scripts": {
         "test": [
             "./vendor/bin/pest"
-        ],
-        "next": [
-            "git tag -f `cat VERSION` @no_additional_args",
-            "echo @additional_args > VERSION",
-            "git commit -am 'start VERSION @additional_args'"
         ]
     }
 }
