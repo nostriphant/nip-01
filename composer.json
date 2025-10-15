@@ -6,7 +6,7 @@
         "php": "^8.4",
         "ext-secp256k1_nostr": "*",
         "simplito/elliptic-php": "^1.0",
-        "nostriphant/functional-alternate": "^1.1"
+        "nostriphant/functional": "^2.2"
     },
     "license": "MIT",
     "autoload": {

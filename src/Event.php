@@ -2,7 +2,7 @@
 
 namespace nostriphant\NIP01;
 
-use nostriphant\FunctionalAlternate\Alternate;
+use nostriphant\Functional\Alternate;
 
 readonly class Event {
 
