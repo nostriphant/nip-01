@@ -16,7 +16,7 @@
         }
     },
     "autoload-dev": {
-        "files": ["tests/Functions.php"]
+        "files": ["tests/Pest.php"]
     },
     "authors": [
         {
