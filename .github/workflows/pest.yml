@@ -5,3 +5,4 @@ on: ['push', 'pull_request']
 jobs:
   ci:
     uses: nostriphant/php-secp256k1/.github/workflows/run-composer-test.yml@main
+
