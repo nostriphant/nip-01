@@ -4,4 +4,4 @@ on: ['push', 'pull_request']
 
 jobs:
   ci:
-      uses: nostriphant/.github/workflows/run-composer-test.yml
+    uses: nostriphant/.github/workflows/run-composer-test.yml@main
