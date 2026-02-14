@@ -1,5 +1,6 @@
 # nip01
-Nostr NIP-01 implementation in PHP, currently this contains only the private/public key related code
+Nostr NIP-01 implementation in PHP, currently this contains only the private/public key related code. 
+This package requires the [secp256k1-nostr-php](https://github.com/1ma/secp256k1-nostr-php) extension to be installed. Follow their installation instructions first.
 
 ## Key usage
 
@@ -33,7 +34,14 @@ print $message; // prints "['COUNT',1]"
 use nostriphant\NIP01\Message;
 use nostriphant\NIP01\Event;
 
-$message = Message::event(new Event());
+$rumor = new Rumor(
+    pubkey: $sender_pubkey,
+    created_at: time(),
+    kind: 14,
+    content: 'Hello!!',
+    tags: [['p', $recipient_pubkey]]
+);
+$message = Message::event($rumor($private_key));
 print $message; // prints "['EVENT',{...}]"
 
 ```
