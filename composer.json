@@ -11,11 +11,13 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "nostriphant\\NIP01\\": "src/",
-            "nostriphant\\NIP01Tests\\": "tests/"
+            "nostriphant\\NIP01\\": "src/"
         }
     },
     "autoload-dev": {
+        "psr-4": {
+            "nostriphant\\NIP01Tests\\": "tests/"
+        },
         "files": ["tests/Pest.php"]
     },
     "authors": [
