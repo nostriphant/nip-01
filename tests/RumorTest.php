@@ -21,5 +21,5 @@ it('wraps message in a seal and seal in a gift', function () {
     
     $event = $message($sender_key);
     
-    expect(Key::verify($event->pubkey, $event->sig, $event->id))->toBeTrue();
+    expect(\nostriphant\NIP01\Event::verify($event))->toBeTrue();
 });
