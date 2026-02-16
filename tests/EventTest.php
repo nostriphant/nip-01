@@ -39,3 +39,13 @@ it('returns object vars on invocation', function () {
     expect($event())->toBe(get_object_vars($event));
 });
 
+it('can check if there is a tag with a certain value', function() {
+   $event = Functions::event(['tags' => [
+       ['t', 'abcd']
+   ]]);
+   
+   expect(Event::hasTagValue($event, 't', 'abcd'))->toBeTrue();
+   expect(Event::hasTagValue($event, 't', 'efgh'))->toBeFalse();
+   expect(Event::hasTagValue($event, 'p', 'abcd'))->toBeFalse();
+});
+

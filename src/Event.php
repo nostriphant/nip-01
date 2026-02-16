@@ -36,6 +36,9 @@ readonly class Event {
     static function hasTag(self $event, string $tag_identifier): bool {
         return count(array_filter($event->tags, fn(array $tag) => $tag[0] === $tag_identifier)) > 0;
     }
+    static function hasTagValue(self $event, string $tag_identifier, string|int $tag_value): bool {
+        return self::hasTag($event, $tag_identifier) && in_array($tag_value, ...self::extractTagValues($event, $tag_identifier));
+    }
 
     static function extractTagValues(self $event, string $tag_identifier): array {
         return array_values(array_map(fn(array $tag) => array_slice($tag, 1), array_filter($event->tags, fn(array $tag) => $tag[0] === $tag_identifier)));
