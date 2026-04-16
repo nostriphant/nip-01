@@ -5,7 +5,7 @@ use nostriphant\NIP01\Rumor;
 use nostriphant\NIP01\Nostr;
 
 it('wraps message in a seal and seal in a gift', function () {
-    $sender_key = Key::fromHex('a71a415936f2dd70b777e5204c57e0df9a6dffef91b3c78c1aa24e54772e33c3');
+    $sender_key = Key::fromHex('435790f13406085d153b10bd9e00a9f977e637f10ce37db5ccfc5d3440c12d6c');
     $sender_pubkey = $sender_key(Key::public());
 
     $message = new Rumor(
@@ -19,7 +19,6 @@ it('wraps message in a seal and seal in a gift', function () {
     expect($message->id)->toBe(hash('sha256', Nostr::encode([0, $message->pubkey, $message->created_at, $message->kind, $message->tags, $message->content])));
     expect($message)->not()->toHaveProperty('sig');
     
-    $event = $message($sender_key);
-    
+    $event = $message($sender_key);    
     expect(\nostriphant\NIP01\Event::verify($event))->toBeTrue();
 });

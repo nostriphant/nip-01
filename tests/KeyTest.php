@@ -42,7 +42,13 @@ it('converts between bytes and hexidecimal for provided functions', function () 
 
 it('works with paulmillrs vectors', function ($vector) {
     // https://github.com/paulmillr/noble-secp256k1/blob/main/test/wycheproof/ecdh_secp256k1_test.json
-    $secret = Key::fromHex($vector->private)(Key::sharedSecret(substr($vector->public, 46)));
+    
+    $ec = Key::curve();
+    $key1 = $ec->keyFromPrivate($vector->private, 'hex');
+    $pub2 = $ec->keyFromPublic(substr($vector->public, 46), 'hex')->pub;
+    $secret = $key1->derive($pub2)->toString('hex');
+
+    //$secret = Key::fromHex($vector->private)(Key::sharedSecret(substr($vector->public, 46)));
     expect(str_pad($secret, 64, '0', STR_PAD_LEFT))->toBe($vector->shared);
 })->with(array_filter(Functions::vectors_secp256k1()->testGroups[0]->tests, fn($vector) => $vector->result === 'valid'));
 

@@ -4,9 +4,11 @@
     "type": "library",
     "require": {
         "php": "^8.4",
-        "ext-secp256k1_nostr": "*",
         "simplito/elliptic-php": "^1.0",
         "nostriphant/functional": "^2.2"
+    },
+    "suggest": {
+        "1ma/secp256k1-nostr-php": "C extension for faster secp256k1 Nostr operations"
     },
     "license": "MIT",
     "autoload": {
