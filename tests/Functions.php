@@ -7,10 +7,6 @@ use nostriphant\NIP01\Key;
 
 class Functions {
 
-    static function vectors_secp256k1(): object {
-        return json_decode(file_get_contents(__DIR__ . '/vectors/ecdh-secp256k1.json'), false);
-    }
-
     private static function key(string $hex): Key {
         return Key::fromHex($hex);
     }

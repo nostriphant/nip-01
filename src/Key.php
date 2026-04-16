@@ -2,7 +2,7 @@
 
 namespace nostriphant\NIP01;
 
-use Elliptic\EC;
+use nostriphant\Secp256k1\Secp256k1;
 
 readonly class Key {
 
@@ -16,10 +16,6 @@ readonly class Key {
 
     static function fromHex(#[\SensitiveParameter] string $private_key): callable {
         return new self($private_key);
-    }
-
-    static function curve(): EC {
-        return new EC('secp256k1');
     }
 
     static function generate(): callable {

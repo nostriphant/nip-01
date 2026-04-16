@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2feb830f3977a4b4b7f82f1c35148286",
+    "content-hash": "5be1808df25c58f22008b7c1034c876d",
     "packages": [
         {
             "name": "nostriphant/functional",
@@ -49,6 +49,53 @@
                 "source": "https://github.com/nostriphant/functional/tree/2.6.1"
             },
             "time": "2026-02-24T07:32:27+00:00"
+        },
+        {
+            "name": "nostriphant/secp256k1",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nostriphant/php-secp256k1.git",
+                "reference": "f6469f756a41e17fbbfdf53b9299af3a9e308e8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nostriphant/php-secp256k1/zipball/f6469f756a41e17fbbfdf53b9299af3a9e308e8d",
+                "reference": "f6469f756a41e17fbbfdf53b9299af3a9e308e8d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4",
+                "simplito/elliptic-php": "^1.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^2.35"
+            },
+            "suggest": {
+                "1ma/secp256k1-nostr-php": "C extension for faster secp256k1 Nostr operations"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "nostriphant\\Secp256k1\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rik Meijer",
+                    "email": "nostriphant@rikmeijer.nl"
+                }
+            ],
+            "description": "Wrapper around 1ma/secp256k1-nostr extension, falls back to simplito/elliptic (pure PHP implementation) when the extension is not available",
+            "support": {
+                "issues": "https://github.com/nostriphant/php-secp256k1/issues",
+                "source": "https://github.com/nostriphant/php-secp256k1/tree/0.1.0"
+            },
+            "time": "2026-04-16T07:52:19+00:00"
         },
         {
             "name": "simplito/bigint-wrapper-php",
