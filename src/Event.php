@@ -47,6 +47,10 @@ readonly class Event {
     static function verify(self $event): bool {
         return Key::verify($event->pubkey, $event->sig, $event->id);
     }
+    
+    static function validate(array $prototype): bool {
+        return count(array_diff_key($prototype, get_class_vars(self::class))) === 0;
+    }
 
     public static function __set_state(array $properties) : self {
         return new self(...$properties);

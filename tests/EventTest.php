@@ -49,3 +49,16 @@ it('can check if there is a tag with a certain value', function() {
    expect(Event::hasTagValue($event, 'p', 'abcd'))->toBeFalse();
 });
 
+it('can validate an Event-prototype', function() {
+    $event_prototype = [
+                    'id' => '',
+                    'pubkey' => '',
+                    'created_at' => time(),
+                    'kind' => 1,
+                    'content' => 'Hello World',
+                    'sig' => '',
+                    'tags' => []
+                        ];
+    expect(Event::validate($event_prototype))->toBeTrue();
+    expect(Event::validate(array_merge($event_prototype, ['dTag' => ''])))->toBeFalse();
+});
