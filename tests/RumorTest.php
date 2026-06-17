@@ -12,11 +12,18 @@ it('wraps message in a seal and seal in a gift', function () {
             created_at: time(),
             kind: 14,
             content: 'Hello!!',
-            tags: []
+            tags: [
+                ['p', $sender_pubkey]
+            ]
     );
     
     expect($message)->not()->toHaveProperty('sig');
     expect($message)->not()->toHaveProperty('id');
+    
+    expect(\nostriphant\NIP01\Event::hasTag($message, 'p'))->toBeTrue();
+    expect(\nostriphant\NIP01\Event::hasTagValue($message, 'p', $sender_pubkey))->toBeTrue();
+    expect(\nostriphant\NIP01\Event::extractTagValues($message, 'p'))->toBe([[$sender_pubkey]]);
+    
     
     $event = $message($sender_key);  
     expect($event->id)->toBe(hash('sha256', Nostr::encode([0, $sender_pubkey, $message->created_at, $message->kind, $message->tags, $message->content])));  
