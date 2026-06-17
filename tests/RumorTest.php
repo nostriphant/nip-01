@@ -9,16 +9,16 @@ it('wraps message in a seal and seal in a gift', function () {
     $sender_pubkey = $sender_key(Key::public());
 
     $message = new Rumor(
-            pubkey: $sender_pubkey,
             created_at: time(),
             kind: 14,
             content: 'Hello!!',
             tags: []
     );
     
-    expect($message->id)->toBe(hash('sha256', Nostr::encode([0, $message->pubkey, $message->created_at, $message->kind, $message->tags, $message->content])));
     expect($message)->not()->toHaveProperty('sig');
+    expect($message)->not()->toHaveProperty('id');
     
-    $event = $message($sender_key);    
+    $event = $message($sender_key);  
+    expect($event->id)->toBe(hash('sha256', Nostr::encode([0, $sender_pubkey, $message->created_at, $message->kind, $message->tags, $message->content])));  
     expect(\nostriphant\NIP01\Event::verify($event))->toBeTrue();
 });
