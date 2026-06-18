@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace nostriphant\NIP01;
 
 use nostriphant\Functional\Alternate;
 
-readonly class Event {
+readonly class Event implements Taggable {
 
     public function __construct(
         public string $id, 
@@ -33,14 +34,14 @@ readonly class Event {
         };
     }
 
-    static function hasTag(self|Rumor $event, string $tag_identifier): bool {
+    static function hasTag(Taggable $event, string $tag_identifier): bool {
         return count(array_filter($event->tags, fn(array $tag) => $tag[0] === $tag_identifier)) > 0;
     }
-    static function hasTagValue(self|Rumor $event, string $tag_identifier, string|int $tag_value): bool {
+    static function hasTagValue(Taggable $event, string $tag_identifier, string|int $tag_value): bool {
         return self::hasTag($event, $tag_identifier) && in_array($tag_value, ...self::extractTagValues($event, $tag_identifier));
     }
 
-    static function extractTagValues(self|Rumor $event, string $tag_identifier): array {
+    static function extractTagValues(Taggable $event, string $tag_identifier): array {
         return array_values(array_map(fn(array $tag) => array_slice($tag, 1), array_filter($event->tags, fn(array $tag) => $tag[0] === $tag_identifier)));
     }
 

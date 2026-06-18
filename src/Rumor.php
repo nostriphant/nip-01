@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace nostriphant\NIP01;
 
 
-readonly class Rumor {
+readonly class Rumor implements Taggable {
     
     public function __construct(public int $created_at, public int $kind, public string $content, public array $tags) {
     }
