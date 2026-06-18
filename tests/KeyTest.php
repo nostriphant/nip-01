@@ -10,13 +10,13 @@ it('generates a private key', function () {
     $hex_private_key = $private_key(Key::private());
     expect($hex_private_key)->toBeString();
 
-    $hex_public_key = $private_key(Key::public());
+    $hex_public_key = Key::derivePublicKey($private_key);
     expect($hex_public_key)->toBe(substr((new \Elliptic\EC('secp256k1'))->keyFromPrivate($hex_private_key)->getPublic(true, 'hex'), 2));
 });
 
 it('generates a public key without an argument', function() {
     $private_key = Key::fromHex('435790f13406085d153b10bd9e00a9f977e637f10ce37db5ccfc5d3440c12d6c');
-    expect($private_key(Key::public()))->toBe('89ac55aeeb301252da33b51ca4d189cb1d665b8f00618f5ea72c2ec59ca555e9');
+    expect(Key::derivePublicKey($private_key))->toBe('89ac55aeeb301252da33b51ca4d189cb1d665b8f00618f5ea72c2ec59ca555e9');
 });
 
 it('converts between bytes and hexidecimal', function () {
@@ -28,25 +28,24 @@ it('converts between bytes and hexidecimal', function () {
 
     $key = Key::fromHex($private_key_hex);
     expect($key(fn() => func_get_arg(0)))->toBe($private_key_hex);
-    expect($key(Key::public()))->toBe($public_key_hex);
+    expect(Key::derivePublicKey($key))->toBe($public_key_hex);
 });
 
 
 it('converts between bytes and hexidecimal for provided functions', function () {
     $private_key = Functions::key_sender();
-    expect($private_key(Key::public()))->toBe(Functions::pubkey_sender());
+    expect(Key::derivePublicKey($private_key))->toBe(Functions::pubkey_sender());
 
     $private_key = Functions::key_recipient();
-    expect($private_key(Key::public()))->toBe(Functions::pubkey_recipient());
+    expect(Key::derivePublicKey($private_key))->toBe(Functions::pubkey_recipient());
 })->with();
 
 it('can sign a string and verify a signature', function () {
     $private_key = Key::fromHex('435790f13406085d153b10bd9e00a9f977e637f10ce37db5ccfc5d3440c12d6c');
 
-    expect($private_key(Key::public()))->toBe('89ac55aeeb301252da33b51ca4d189cb1d665b8f00618f5ea72c2ec59ca555e9');
+    expect(Key::derivePublicKey($private_key))->toBe('89ac55aeeb301252da33b51ca4d189cb1d665b8f00618f5ea72c2ec59ca555e9');
 
     $hash = hash('sha256', 'hallo world');
-    $signature = $private_key(Key::signer($hash));
-
-    expect(Key::verify('89ac55aeeb301252da33b51ca4d189cb1d665b8f00618f5ea72c2ec59ca555e9', $signature, $hash))->toBeTrue();
+    
+    expect(Key::verify('89ac55aeeb301252da33b51ca4d189cb1d665b8f00618f5ea72c2ec59ca555e9', Key::sign($private_key, $hash), $hash))->toBeTrue();
 });

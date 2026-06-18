@@ -46,15 +46,15 @@ it('can generate a properly signed note', function () {
 
     $at = time();
 
-    $event_id = hash('sha256', Nostr::encode([0, $private_key(Key::public()), $at, 1, [], 'Hello world!']));
+    $event_id = hash('sha256', Nostr::encode([0, Key::derivePublicKey($private_key), $at, 1, [], 'Hello world!']));
     $signed_message = Message::event(new Event(
                     id: $event_id,
-                    pubkey: $private_key(Key::public()),
+                    pubkey: Key::derivePublicKey($private_key),
                     created_at: $at,
                     kind: 1,
                     content: 'Hello world!',
                     tags: [],
-                    sig: $private_key(Key::signer($event_id))
+                    sig: Key::sign($private_key, $event_id)
             ));
 
     expect($signed_message->type)->toBe('EVENT');

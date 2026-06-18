@@ -10,7 +10,7 @@ readonly class Rumor implements Taggable {
     }
 
     public function __invoke(Key $private_key): Event {
-        $pubkey = $private_key(Key::public());
+        $pubkey = Key::derivePublicKey($private_key);
         $id = hash('sha256', Nostr::encode([0, $pubkey, $this->created_at, $this->kind, $this->tags, $this->content]));
         return new Event(
             id: $id,
@@ -19,7 +19,7 @@ readonly class Rumor implements Taggable {
             kind: $this->kind,
             tags: $this->tags,
             content: $this->content,
-            sig: $private_key(Key::signer($id))
+            sig: Key::sign($private_key, $id)
         );
     }
 
