@@ -7,6 +7,7 @@
         "nostriphant/functional": "^2.2",
         "nostriphant/secp256k1": "^0.1.0"
     },
+    "bin" : ["bin/key"],
     "license": "MIT",
     "autoload": {
         "psr-4": {

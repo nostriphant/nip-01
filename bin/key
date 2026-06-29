@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+use \nostriphant\NIP01\Key;
+
+require $_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php';
+
+print 'Generating new nostr private key' . PHP_EOL;
+
+$key = Key::generate();
+print 'Private key (HEX): ' . $key(fn(string $key) => $key) . PHP_EOL;
+print 'Public key (HEX): ' . Key::derivePublicKey($key) . PHP_EOL;
