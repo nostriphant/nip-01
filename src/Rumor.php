@@ -16,6 +16,9 @@ readonly class Rumor implements Taggable {
     }
 
     public static function __set_state(array $properties): self {
+        if (isset($properties['id'])) {
+            unset($properties['id']);
+        }
         return new self(...$properties);
     }
 }
