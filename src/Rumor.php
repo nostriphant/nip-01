@@ -5,24 +5,15 @@ namespace nostriphant\NIP01;
 
 
 readonly class Rumor implements Taggable {
-    
-    public function __construct(public int $created_at, public int $kind, public string $content, public array $tags) {
+    public string $id;
+
+    public function __construct(public int $created_at, public string $pubkey, public int $kind, public string $content, public array $tags) {
+        $this->id = hash('sha256', Nostr::encode([0, $pubkey, $this->created_at, $this->kind, $this->tags, $this->content]));
     }
 
-    public function __invoke(Key $private_key): Event {
-        $pubkey = Key::derivePublicKey($private_key);
-        $id = hash('sha256', Nostr::encode([0, $pubkey, $this->created_at, $this->kind, $this->tags, $this->content]));
-        return new Event(
-            id: $id,
-            pubkey: $pubkey,
-            created_at: $this->created_at,
-            kind: $this->kind,
-            tags: $this->tags,
-            content: $this->content,
-            sig: Key::sign($private_key, $id)
-        );
+    public function __invoke(): array {
+        return get_object_vars($this);
     }
-
 
     public static function __set_state(array $properties): self {
         return new self(...$properties);
